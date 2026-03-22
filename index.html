@@ -748,28 +748,109 @@ const CODIGOS_OCORR = [
 // ═══════════════════════════════════════════
 // PERSISTÊNCIA
 // ═══════════════════════════════════════════
-const LINHA_PADRAO = {id:'MGRJ0265118',codigo:'MGRJ0265118',nome:'Belo Horizonte → Rio de Janeiro',empresa:'—',duracao:'—',paradas:[
-  {nome:'Belo Horizonte (MG)',tipo:'ORIGEM',previsto:''},
-  {nome:'Barbacena (MG) — Desembarque',tipo:'DESEMBARQUE',previsto:''},
-  {nome:'Barbacena (MG) — Restaurante Cabana da Mantiqueira',tipo:'REFEICAO',previsto:''},
-  {nome:'Rio de Janeiro (RJ)',tipo:'DESTINO',previsto:''}
-]};
-const LINHA_RJSP = {id:'RJSP0284027',codigo:'RJSP0284027',nome:'Volta Redonda → Mogi das Cruzes',empresa:'—',duracao:'—',paradas:[
-  {nome:'Volta Redonda (RJ)',tipo:'ORIGEM',previsto:'06:20'},
-  {nome:'Resende (RJ)',tipo:'EMBARQUE+DESEMBARQUE',previsto:''},
-  {nome:'Cachoeira Paulista (SP)',tipo:'EMBARQUE+DESEMBARQUE',previsto:''},
-  {nome:'Aparecida (SP)',tipo:'EMBARQUE+DESEMBARQUE',previsto:''},
-  {nome:'Taubaté (SP)',tipo:'EMBARQUE+DESEMBARQUE',previsto:''},
-  {nome:'Caçapava (SP)',tipo:'EMBARQUE+DESEMBARQUE',previsto:''},
-  {nome:'São José dos Campos (SP)',tipo:'EMBARQUE+DESEMBARQUE',previsto:''},
-  {nome:'Mogi das Cruzes (SP)',tipo:'DESTINO',previsto:''}
-]};
+const LINHAS_PADRAO = [
+  {
+    id:'MGRJ0265118-RBR', codigo:'MGRJ0265118-RBR',
+    nome:'Belo Horizonte → Rio de Janeiro',
+    empresa:'RBR', duracao:'—',
+    paradas:[
+      { nome:'Belo Horizonte (MG)',                        tipo:'ORIGEM',    previsto:'09:00' },
+      { nome:'Cabana (Barbacena) MG — Refeição',           tipo:'REFEICAO',  previsto:'' },
+      { nome:'Barbacena (MG)',                             tipo:'EMBARQUE',  previsto:'' },
+      { nome:'Petrópolis (RJ)',                            tipo:'DESEMBARQUE', previsto:'' },
+      { nome:'Rio de Janeiro (RJ)',                        tipo:'DESTINO',   previsto:'' }
+    ]
+  },
+  {
+    id:'MGRJ0265096-RBR', codigo:'MGRJ0265096-RBR',
+    nome:'Rio de Janeiro → Ouro Branco',
+    empresa:'RBR', duracao:'—',
+    paradas:[
+      { nome:'Rio de Janeiro (RJ)',                        tipo:'ORIGEM',      previsto:'07:30' },
+      { nome:'Duque de Caxias (RJ)',                       tipo:'EMBARQUE',    previsto:'' },
+      { nome:'Petrópolis (RJ)',                            tipo:'EMBARQUE',    previsto:'' },
+      { nome:'Graal (Juiz de Fora) MG — Refeição',        tipo:'REFEICAO',    previsto:'' },
+      { nome:'Santos Dumont (MG)',                         tipo:'DESEMBARQUE', previsto:'' },
+      { nome:'Barbacena (MG)',                             tipo:'DESEMBARQUE', previsto:'' },
+      { nome:'Carandaí (MG)',                              tipo:'DESEMBARQUE', previsto:'' },
+      { nome:'Conselheiro Lafaiete (MG)',                  tipo:'DESEMBARQUE', previsto:'' },
+      { nome:'Ouro Branco (MG)',                           tipo:'DESTINO',     previsto:'' }
+    ]
+  },
+  {
+    id:'RJSP0265032-RBR', codigo:'RJSP0265032-RBR',
+    nome:'Rio de Janeiro → Santos',
+    empresa:'RBR', duracao:'—',
+    paradas:[
+      { nome:'Rio de Janeiro (RJ)',                        tipo:'ORIGEM',      previsto:'07:30' },
+      { nome:'Resende (RJ)',                               tipo:'EMBARQUE',    previsto:'' },
+      { nome:'Graal SP — Refeição',                        tipo:'REFEICAO',    previsto:'' },
+      { nome:'Taubaté (SP)',                               tipo:'DESEMBARQUE', previsto:'' },
+      { nome:'São José dos Campos (SP)',                   tipo:'DESEMBARQUE', previsto:'' },
+      { nome:'Cubatão (SP)',                               tipo:'DESEMBARQUE', previsto:'' },
+      { nome:'Santos (SP)',                                tipo:'DESTINO',     previsto:'' }
+    ]
+  },
+  {
+    id:'GORJ0064048-ROTAS', codigo:'GORJ0064048-ROTAS',
+    nome:'Graal São Carlos → Rio de Janeiro',
+    empresa:'ROTAS', duracao:'—',
+    paradas:[
+      { nome:'Graal São Carlos (SP)',                      tipo:'ORIGEM',              previsto:'06:00' },
+      { nome:'Campinas (SP)',                              tipo:'EMBARQUE+DESEMBARQUE', previsto:'' },
+      { nome:'São José dos Campos (SP)',                   tipo:'EMBARQUE+DESEMBARQUE', previsto:'' },
+      { nome:'Taubaté (SP)',                               tipo:'EMBARQUE+DESEMBARQUE', previsto:'' },
+      { nome:'Aparecida (SP)',                             tipo:'EMBARQUE+DESEMBARQUE', previsto:'' },
+      { nome:'Graal SP — Refeição',                        tipo:'REFEICAO',             previsto:'' },
+      { nome:'Resende (RJ)',                               tipo:'DESEMBARQUE',           previsto:'' },
+      { nome:'Rio de Janeiro (RJ)',                        tipo:'DESTINO',              previsto:'' }
+    ]
+  },
+  {
+    id:'RJSP0284027-ROTAS', codigo:'RJSP0284027-ROTAS',
+    nome:'Volta Redonda → São José dos Campos',
+    empresa:'ROTAS', duracao:'—',
+    paradas:[
+      { nome:'Volta Redonda (RJ)',                         tipo:'ORIGEM',      previsto:'06:20' },
+      { nome:'Resende (RJ)',                               tipo:'EMBARQUE',    previsto:'' },
+      { nome:'Graal SP — Refeição',                        tipo:'REFEICAO',    previsto:'' },
+      { nome:'Cachoeira Paulista (SP)',                    tipo:'DESEMBARQUE', previsto:'' },
+      { nome:'Aparecida (SP)',                             tipo:'EMBARQUE',    previsto:'' },
+      { nome:'Taubaté (SP)',                               tipo:'EMBARQUE',    previsto:'' },
+      { nome:'São José dos Campos (SP)',                   tipo:'DESTINO',     previsto:'' }
+    ]
+  },
+  {
+    id:'SPRJ0265120-ROTAS', codigo:'SPRJ0265120-ROTAS',
+    nome:'Campinas → Rio de Janeiro',
+    empresa:'ROTAS', duracao:'—',
+    paradas:[
+      { nome:'Campinas (SP)',                              tipo:'ORIGEM',      previsto:'06:20' },
+      { nome:'Graal SP — Refeição',                        tipo:'REFEICAO',    previsto:'' },
+      { nome:'Resende (RJ)',                               tipo:'DESEMBARQUE', previsto:'' },
+      { nome:'Rio de Janeiro (RJ)',                        tipo:'DESTINO',     previsto:'' }
+    ]
+  },
+  {
+    id:'RJSP0284006-ROTAS', codigo:'RJSP0284006-ROTAS',
+    nome:'Jacareí → Rio de Janeiro',
+    empresa:'ROTAS', duracao:'—',
+    paradas:[
+      { nome:'Jacareí (SP)',                               tipo:'ORIGEM',      previsto:'08:20' },
+      { nome:'São José dos Campos (SP)',                   tipo:'EMBARQUE',    previsto:'' },
+      { nome:'Taubaté (SP)',                               tipo:'EMBARQUE',    previsto:'' },
+      { nome:'Aparecida (SP)',                             tipo:'EMBARQUE',    previsto:'' },
+      { nome:'Resende (RJ)',                               tipo:'DESEMBARQUE', previsto:'' },
+      { nome:'Rio de Janeiro (RJ)',                        tipo:'DESTINO',     previsto:'' }
+    ]
+  }
+];
 
 function loadDB(key,def){try{const r=localStorage.getItem(key);if(r)return JSON.parse(r);}catch(e){}return def;}
 function saveDB(key,val){try{localStorage.setItem(key,JSON.stringify(val));const ic=document.getElementById('saveIndicator');if(ic){ic.classList.add('saved');setTimeout(()=>ic.classList.remove('saved'),1500);}}catch(e){}}
 
 const DB = {
-  linhas:    loadDB('mt_linhas',   [LINHA_PADRAO, LINHA_RJSP]),
+  linhas:    loadDB('mt_linhas',   LINHAS_PADRAO),
   historico: loadDB('mt_historico',[])
 };
 
@@ -1555,8 +1636,20 @@ document.addEventListener('DOMContentLoaded',()=>{
       document.getElementById('dashBemVindo').textContent='Bem-vindo, '+m.nome.split(' ')[0]+'!';
     }
   }catch(e){}
-  // Garantir linhas padrão
-  [LINHA_PADRAO,LINHA_RJSP].forEach(lp=>{if(!DB.linhas.find(l=>l.id===lp.id)){DB.linhas.push(lp);persistir();}});
+  // Forçar atualização das linhas padrão (limpa antigas e carrega as novas)
+  const linhasAtuais = DB.linhas;
+  const idsNovos = LINHAS_PADRAO.map(l => l.id);
+  // Remover linhas antigas que não estão mais no padrão
+  DB.linhas = linhasAtuais.filter(l => !['MGRJ0265118','RJSP0284027','MGRJ0265118-RBR','MGRJ0265096-RBR','RJSP0265032-RBR','GORJ0064048-ROTAS','RJSP0284027-ROTAS','SPRJ0265120-ROTAS','RJSP0284006-ROTAS'].includes(l.id) === false ? idsNovos.includes(l.id) : false);
+  // Garantir que todas as linhas padrão existem e estão atualizadas
+  LINHAS_PADRAO.forEach(lp => {
+    const idx = DB.linhas.findIndex(l => l.id === lp.id);
+    if (idx >= 0) DB.linhas[idx] = lp; // atualiza
+    else DB.linhas.push(lp);            // adiciona se não existe
+  });
+  // Ordenar na ordem correta
+  DB.linhas.sort((a,b) => idsNovos.indexOf(a.id) - idsNovos.indexOf(b.id));
+  persistir();
   atualizarStats();
   const d=new Date();
   document.getElementById('dashDate').textContent=d.toLocaleDateString('pt-BR',{weekday:'long',year:'numeric',month:'long',day:'numeric'}).toUpperCase();
@@ -1567,3 +1660,4 @@ window.addEventListener('beforeunload',e=>{if(est.iniciada){e.preventDefault();e
 </script>
 </body>
 </html>
+
